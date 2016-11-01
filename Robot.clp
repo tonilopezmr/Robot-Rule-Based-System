@@ -1,8 +1,9 @@
-;; Static facts (Map X Y Warehouse X Y) 
-;; (MaxDepth ?maxDepth) (Max depth in graph)
+;; Static fact (Grid X Y Warehouse X Y) 
+;; Static fact (MaxDepth ?maxDepth) (Max depth in graph)
+;; Dynamic fact (Robot X Y BULBS Lamp X X BURNED_OUT_BULBS Lamp.. Level LEVEL)
 
 (deffacts facts
-	(Map 5 4 Warehouse 2 3)
+	(Grid 5 4 Warehouse 2 3)
 )
 
 (defglobal ?*nod-gen* = 0)
@@ -21,7 +22,7 @@
 )	
 	
 (defrule move-right
-	(Map ?mX ?mY $?)
+	(Grid ?mX ?mY $?)
 	(Robot ?x $?aux Level ?n)
 	(MaxDepth ?maxDepth)
 	(test (< ?n ?maxDepth))
@@ -32,7 +33,7 @@
 )
 
 (defrule move-left
-	(Map ?mX ?mY $?)
+	(Grid ?mX ?mY $?)
 	(Robot ?x $?aux Level ?n)
 	(MaxDepth ?maxDepth)
 	(test (< ?n ?maxDepth))
@@ -43,7 +44,7 @@
 )
 
 (defrule move-up
-	(Map ?mX ?mY $?)
+	(Grid ?mX ?mY $?)
 	(Robot ?x ?y $?aux Level ?n)
 	(MaxDepth ?maxDepth)
 	(test (< ?n ?maxDepth))
@@ -54,7 +55,7 @@
 )
 
 (defrule move-down
-	(Map ?mX ?mY $?)
+	(Grid ?mX ?mY $?)
 	(Robot ?x ?y $?aux Level ?n)
 	(MaxDepth ?maxDepth)
 	(test (< ?n ?maxDepth))
@@ -75,7 +76,7 @@
 )
 
 (defrule charge 
-	(Map $? Warehouse ?x ?y)
+	(Grid $? Warehouse ?x ?y)
 	(Robot ?x ?y ?bulb $?aux Lamp ?lX ?lY ?lBulb $?aux1 Level ?n)
 	(MaxDepth ?maxDepth)
 	(test (< ?n ?maxDepth))
