@@ -7,7 +7,17 @@
 )
 
 (defglobal ?*nod-gen* = 0)
+(defglobal ?*f* = 1)
 	
+(deffunction control (?rX ?rY ?b ?lamps ?wX ?wY ?n)
+    (bind ?*f* (+ ?n 1 (h ?rX ?rY ?b ?lamps ?wX ?wY))))
+
+(deffunction h (?rX ?rY ?b ?lamps ?wX ?wY)
+        //for each lamp
+	//if robot has bulbs: go to the warehouse, charge, go to lamp, repair lamp
+	//else only: go to lamp, repair lamp
+)
+
 (deffunction init () 
 	(reset)
 	(printout t "Max depth? " crlf)
