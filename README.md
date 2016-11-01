@@ -17,9 +17,38 @@ The cost of each movement over the grid, and loading/replacing all bulbs is 1.
 
   ![Initial State](art/initial_state.png)
   
-####IMPLEMENTATION OF A HEURISTIC FUNCTION
+#### IMPLEMENTATION OF A HEURISTIC FUNCTION
 
 Let us implement a heuristic function for the problem described in Section A using an A algorithm f(n) = g(n)+h(n), where:
 
-* 1) g(n) is the number of operations performed from the initial state to reach state n. The operations that are considered are: movements over the grid and load/replace bulbs.
-* 2) h(n) is the estimation of the number of operations to reach the final state from state n. Modify the design performed in Section A to incorporate a heuristic function that computes f(n).
+1. g(n) is the number of operations performed from the initial state to reach state n. The operations that are considered are: movements over the grid and load/replace bulbs.
+2. h(n) is the estimation of the number of operations to reach the final state from state n.
+
+#### How to compute the heuristic function h(n):
+
+If the robot is not carrying bulbs, the heuristic function assumes that the robot will go to the warehouse to load bulbs. Next, the robot would go to the first lamppost to replace the blown bulbs and would go back to the warehouse to load bulbs. So on and so forth until the last lamppost, that after replacing the bulbs, the robot does not need to go back to the warehouse.
+
+In this way, the cost of the heuristic function would sum the following values:
+
+1. The distance from the robot to the warehouse.
+2. For each lamppost with blown bulbs (except for the last one), the distance from this lamppost to the warehouse and back.
+3. For the last lamppost, the distance from the warehouse to this lamppost.
+4. The cost of every loading/replacing operation. The cost of a single operation is 1.
+
+You do not need to take into account if the number of bulbs loaded or replaced is appropriated.
+
+If the robot is carrying bulbs, then the sum defined above must exclude the first item, since the robot will directly go the lamppost.
+
+The distance between two objects A and B is the Manhattan distance: d(A,B) = |Ax – Bx| + |Ay – By|
+
+In Figure 1, assuming that lampposts are visited in the following order (4,2), (3,4) and (5,4), the value of the heuristic function h(n) would be:
+
+* Distance from the robot to the warehouse: 1.
+* Loading bulbs: 1
+* Distance from the warehouse to the first lamppost (4,2), replace bulbs, back to the warehouse and load bulbs: 3 + 1 + 3 + 1
+* Distance from the warehouse to the second lamppost (3,4), replace bulbs, back to the warehouse and load bulbs: 2 + 1 + 2 + 1
+* Distance from the warehouse to the third lamppost (5,4) and replace bulbs: 4 +1
+
+### Total h(n)= 21
+
+Compare the depth of the solution and the number of generated nodes in Robot without Heuristic with breadth and depth strategies to those obtained with the heuristic function. Discuss the properties of the heuristic function h(n).
