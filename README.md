@@ -14,3 +14,12 @@ When the robot is at the warehouse, it can load several bulbs without exceeding 
 When the robot arrives to a lamppost with blown bulbs, it will be able to fix the lamppost if it is carrying at least as many bulbs as blown bulbs. The replacement of all the blown bulbs in a lamppost is performed with a single rule. It is not possible to replace only some of the blown bulbs in a lamppost, all of them must be replaced at the same time. For example, in Figure 1, the lamppost in cell (4,2) has 2 blown bulbs, so if the robot is carrying 2 or 3 bulbs, then it will replace all blown bulbs with a single rule.
 
 The cost of each movement over the grid, and loading/replacing all bulbs is 1.
+
+  ![Initial State](art/initial_state.png)
+  
+####IMPLEMENTATION OF A HEURISTIC FUNCTION
+
+Let us implement a heuristic function for the problem described in Section A using an A algorithm f(n) = g(n)+h(n), where:
+
+* 1) g(n) is the number of operations performed from the initial state to reach state n. The operations that are considered are: movements over the grid and load/replace bulbs.
+* 2) h(n) is the estimation of the number of operations to reach the final state from state n. Modify the design performed in Section A to incorporate a heuristic function that computes f(n).
