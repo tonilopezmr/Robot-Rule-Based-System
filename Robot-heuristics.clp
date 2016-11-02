@@ -27,15 +27,15 @@
 			
 		(if (< ?rB ?lBulb) then
 			(bind ?result (+ ?result (distManh ?rX ?rY ?wX ?wY) 1))
-            (bind ?rX ?wX) 
+            		(bind ?rX ?wX) 
 			(bind ?rY ?wY)
-            (bind ?b ?lBulb)
+            		(bind ?rB ?lBulb)
 		)
 		
 		(bind ?result (+ ?result (distManh ?rX ?rY ?lX ?lY) 1))
-        (bind ?rX ?lX) 
+		(bind ?rX ?lX) 
 		(bind ?rY ?lY)
-        (bind ?rB (- ?rB ?lBulb))
+       		(bind ?rB (- ?rB ?lBulb))
 		
 		(bind ?i (+ ?i 4))
 	) 
